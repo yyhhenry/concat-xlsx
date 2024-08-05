@@ -3,6 +3,9 @@
 ```ps1
 concat-xlsx.exe --help
 
+# 把*.xls批量转换为*.xlsx
+.\to-xlsx.ps1 .\data\
+
 # Usage
 concat-xlsx.exe .\data\
 # or with specific output file
