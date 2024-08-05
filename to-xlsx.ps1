@@ -1,10 +1,20 @@
+param (
+    [Parameter(Mandatory = $true)]
+    [string]$Path
+)
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
 $excel.DisplayAlerts = $false
 
 $xlOpenXMLWorkbook = 51
 
-Get-ChildItem -Path "./data" | Where-Object { $_.Extension -eq ".xls" } | ForEach-Object {
+
+if (-not (Test-Path $Path)) {
+    Write-Error "The specified path does not exist: $Path"
+    exit 1
+}
+
+Get-ChildItem -Path $Path | Where-Object { $_.Extension -eq ".xls" } | ForEach-Object {
     $workbook = $excel.Workbooks.Open($_.FullName)
     $newName = $_.FullName -replace '\.xls$', '.xlsx'
     Write-Output "Generate $newName"
