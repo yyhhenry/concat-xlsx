@@ -18,9 +18,16 @@ parser.add_argument(
     default="output.xlsx",
     help="目标文件名",
 )
+parser.add_argument(
+    "--without-header",
+    dest="without_header",
+    action="store_true",
+    help="不把第一行看作表头",
+)
 args = parser.parse_args()
 input_dir = str(args.input_dir)
 output_file = str(args.output)
+without_header = bool(args.without_header)
 
 xlsx_files = [f for f in os.listdir(input_dir) if f.endswith(".xlsx")]
 
@@ -35,7 +42,7 @@ for file in xlsx_files:
     ws = wb.active
     assert ws is not None, "没有找到活动工作表！"
 
-    start = 1 if offset == 0 else 2
+    start = 1 if offset == 0 or without_header else 2  # 跳过表头，第一个或无表头除外
 
     for row in ws.iter_rows(min_row=start, values_only=False):
         for col, cell in enumerate(row):
