@@ -1,4 +1,4 @@
-# concat-xlsx
+# concat-xlsx v0.1.0
 
 ```ps1
 concat-xlsx.exe --help
