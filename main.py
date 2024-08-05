@@ -11,7 +11,9 @@ parser.add_argument(
     help="指定文件夹路径",
 )
 parser.add_argument(
+    "-o",
     "--output",
+    dest="output",
     type=str,
     default="output.xlsx",
     help="目标文件名",

@@ -1,1 +1,1 @@
-pyinstaller --onefile main.py
+pyinstaller --onefile main.py --name concat-xlsx
